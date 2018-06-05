@@ -1,0 +1,14 @@
+
+node_modules/
+
+ \.babelrc
+
+\.DS_Store
+
+package-lock\.json
+
+package\.json
+
+webpack\.config\.js
+
+*.babelrc
