@@ -12,3 +12,5 @@ package\.json
 webpack\.config\.js
 
 *.babelrc
+
+\.idea/
