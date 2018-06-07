@@ -1,0 +1,137 @@
+{
+  "translateArray": [
+    {
+      "translatable": "cat",
+      "variants": [
+        "собака",
+        "кот",
+        "утка"
+      ],
+      "translate": [
+        "кот"
+      ]
+    },
+    {
+      "translatable": "dog",
+      "variants": [
+        "собака",
+        "кот",
+        "утка"
+      ],
+      "translate": [
+        "собака"
+      ]
+    },
+    {
+      "translatable": "ball",
+      "variants": [
+        "машина",
+        "дом",
+        "мяч"
+      ],
+      "translate": [
+        "мяч"
+      ]
+    },
+    {
+      "translatable": "phone",
+      "variants": [
+        "дом",
+        "ручка",
+        "телефон"
+      ],
+      "translate": [
+        "телефон"
+      ]
+    },
+    {
+      "translatable": "pen",
+      "variants": [
+        "собака",
+        "перерыв",
+        "ручка"
+      ],
+      "translate": [
+        "ручка"
+      ]
+    },
+    {
+      "translatable": "salary",
+      "variants": [
+        "перерыв",
+        "жалованье",
+        "растяжение"
+      ],
+      "translate": [
+        "жалованье"
+      ]
+    },
+    {
+      "translatable": "even",
+      "variants": [
+        "равный",
+        "ровный",
+        "крутой"
+      ],
+      "translate": [
+        "равный"
+      ]
+    },
+    {
+      "translatable": "candy",
+      "variants": [
+        "нога",
+        "палка",
+        "леденец"
+      ],
+      "translate": [
+        "леденец"
+      ]
+    },
+    {
+      "translatable": "smash",
+      "variants": [
+        "дом",
+        "ломать",
+        "прыгать"
+      ],
+      "translate": [
+        "ломать"
+      ]
+    },
+    {
+      "translatable": "knitted",
+      "variants": [
+        "сломанный",
+        "вязаный",
+        "точный"
+      ],
+      "translate": [
+        "вязаный"
+      ]
+    }
+  ],
+  "audio": [
+    "cat",
+    "dog",
+    "pan",
+    "car",
+    "independent",
+    "roof",
+    "phone",
+    "checkout",
+    "drive off"
+  ],
+  "drag": [
+    "cat",
+    "dog",
+    "pan",
+    "car",
+    "independent",
+    "roof",
+    "phone",
+    "checkout",
+    "yellow",
+    "black"
+  ]
+}

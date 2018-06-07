@@ -1,3 +1,6 @@
+const MenuSpy = require('menuspy');
+const SmoothScroll = require('smooth-scroll');
+
 let slideIndex = 1;
 
 const showSlides = n => {
@@ -36,7 +39,6 @@ prev.addEventListener('click', e => {
   plusSlides(-1);
 });
 
-const scroll = new SmoothScroll('a[href*="#"]');
-
 const nav = document.querySelector('.header');
 const spy = new MenuSpy(nav);
+const scroll = new SmoothScroll('a[href*="#"]');

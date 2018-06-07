@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito|Yatra+One');
+@import url('./normalize.css');
 
 * {
     box-sizing: border-box;
@@ -7,11 +8,6 @@
 body {
     background: #c1c1c1;
     font-family: 'Nunito', sans-serif;
-}
-
-.container {
-    /*    max-width: 1200px;
-        margin: 0 auto;*/
 }
 
 .header {
