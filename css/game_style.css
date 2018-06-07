@@ -160,6 +160,7 @@ input[type='text'] {
     color: #fff;
     width: 70px;
 }
+
 .submitBtn {
     padding: 5px;
     background: rgb(192, 10, 10);
@@ -170,6 +171,7 @@ input[type='text'] {
     color: #fff;
     width: 70px;
 }
+
 .drag {
     list-style: none;
     padding: 0;
