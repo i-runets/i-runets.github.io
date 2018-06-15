@@ -86,8 +86,8 @@ input[type='text'] {
     display: flex;
     flex-direction: column;
     border-radius: 20px;
-    width: 500px;
-    max-height: 400px;
+    width: 600px;
+    max-height: 800px;
     background: #fff;
     padding: 30px;
     overflow: auto;
@@ -184,6 +184,21 @@ input[type='text'] {
 }
 
 .drag li {
+    display: inline-block;
+    margin: 2px;
+    padding: 4px 5px;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 10px;
+    color: rgb(37, 10, 192);
+}
+
+.sort {
+    list-style: none;
+    padding: 0;
+}
+
+.sort li {
     display: inline-block;
     margin: 2px;
     padding: 4px 5px;

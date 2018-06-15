@@ -128,11 +128,15 @@ const createQ = () => {
   let numberForTranslate;
   let numberForAudio;
   let numberForDrag;
+  let numberForCapitals;
+  let numberForRecognizer;
+  let wordForRecognizer;
+  let resultForRecognizer;
   const playBtn = document.createElement('button');
   playBtn.textContent = 'Play';
   playBtn.classList.add('playBtn');
 
-  const taskType = Math.floor(Math.random() * 4);
+  const taskType = Math.floor(Math.random() * Object.keys(task).length);
   if (taskType === 0) {
     currentTask = task.math;
     description.textContent = `Решить: ${currentTask}`;
@@ -181,6 +185,51 @@ const createQ = () => {
       $('.drag').sortable();
     });
   }
+  if (taskType === 4) {
+    currentTask = task.capitals;
+    numberForCapitals = Math.floor(Math.random() * currentTask.length);
+    description.textContent = 'Столица: ';
+    const img = new Image();
+    img.src = currentTask[numberForCapitals].img;
+    modal.appendChild(img);
+  }
+  if (taskType === 5) {
+    currentTask = task.sort;
+    description.textContent = 'Расставить в порядке возрастания:';
+    const sort = document.createElement('ul');
+    currentTask.forEach(elem => {
+      const num = document.createElement('li');
+      num.textContent = elem;
+      sort.appendChild(num);
+    });
+    sort.classList.add('sort');
+    answer = sort;
+
+    $(function() {
+      $('.sort').sortable();
+    });
+  }
+  if (taskType === 6) {
+    currentTask = task.recognizer;
+    wordForRecognizer = task.audio;
+    numberForRecognizer = Math.floor(Math.random() * wordForRecognizer.length);
+    description.textContent = `Произнести: ${wordForRecognizer[numberForRecognizer]}`;
+    answer = document.createElement('p');
+    currentTask.onresult = e => {
+      resultForRecognizer = e.results[e.resultIndex];
+      if (resultForRecognizer.isFinal) {
+        answer.textContent = resultForRecognizer[0].transcript;
+      }
+    };
+
+    const play = document.createElement('button');
+    play.textContent = 'Say';
+    play.classList.add('playBtn');
+    play.addEventListener('click', (e) => {
+      currentTask.start();
+    });
+    modal.appendChild(play);
+  }
 
   modal.appendChild(description);
   modal.appendChild(translateOptions);
@@ -214,10 +263,9 @@ const createQ = () => {
     }
     if (taskType === 3) {
       let res = '';
-      let allDrag = document.getElementsByClassName('drag');
-      let currDrag = allDrag[allDrag.length - 1];
-      for (let i = 0; i < currDrag.childElementCount; i++) {
-        res += currDrag.children[i].textContent;
+      let drag = document.querySelector('.drag');
+      for (let i = 0; i < drag.childElementCount; i++) {
+        res += drag.children[i].textContent;
       }
       if (res === currentTask[numberForDrag]) {
         castSpell(gameState.selectedSpell, 'monster');
@@ -225,10 +273,37 @@ const createQ = () => {
         castSpell('lighting', 'hero');
       }
     }
-    submit.disabled = true;
-    answer.disabled = true;
-    answer.style.color = 'rgb(179, 179, 179)';
-    submit.style.color = 'rgb(179, 179, 179)';
+    if (taskType === 4) {
+      if (answer.value.toLowerCase() ===
+          currentTask[numberForCapitals].capital) {
+        castSpell(gameState.selectedSpell, 'monster');
+      } else {
+        castSpell('lighting', 'hero');
+      }
+    }
+    if (taskType === 5) {
+      let res = [];
+      const sort = document.querySelector('.sort');
+      for (let i = 0; i < sort.childElementCount; i++) {
+        res.push(sort.children[i].textContent);
+      }
+      if (res.join('') === currentTask.sort((a, b) => {
+        return a - b;
+      }).join('')) {
+        castSpell(gameState.selectedSpell, 'monster');
+      }
+      else {
+        castSpell('lighting', 'hero');
+      }
+    }
+    if (taskType === 6) {
+      console.log(answer.textContent, wordForRecognizer[numberForRecognizer]);
+      if (answer.textContent === wordForRecognizer[numberForRecognizer]) {
+        castSpell(gameState.selectedSpell, 'monster');
+      } else {
+        castSpell('lighting', 'hero');
+      }
+    }
 
     qWrapper.remove();
   });

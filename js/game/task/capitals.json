@@ -1,0 +1,30 @@
+[
+  {
+    "capital": "оттава",
+    "img": "./img/game/capitals/canada.png"
+  },
+  {
+    "capital": "пекин",
+    "img": "./img/game/capitals/china.png"
+  },
+  {
+    "capital": "берлин",
+    "img": "./img/game/capitals/germany.png"
+  },
+  {
+    "capital": "париж",
+    "img": "./img/game/capitals/france.png"
+  },
+  {
+    "capital": "вашингтон",
+    "img": "./img/game/capitals/usa.png"
+  },
+  {
+    "capital": "токио",
+    "img": "./img/game/capitals/japan.png"
+  },
+  {
+    "capital": "кампала",
+    "img": "./img/game/capitals/uganda.png"
+  }
+]
