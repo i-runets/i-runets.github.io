@@ -223,7 +223,7 @@ const createQ = () => {
     };
 
     const play = document.createElement('button');
-    play.textContent = 'Say';
+    play.textContent = 'Press me';
     play.classList.add('playBtn');
     play.addEventListener('click', (e) => {
       currentTask.start();
@@ -447,7 +447,10 @@ background.src = './img/game/background.png';
 const lightingSound = new Audio('./sound/lighting.mp3');
 const healSound = new Audio('./sound/heal.mp3');
 const gunSound = new Audio('./sound/gun.mp3');
-const endSound = new Audio('./sound/blop.mp3');
+const bgMusic = new Audio('./sound/background.mp3');
+bgMusic.play();
+bgMusic.loop = true;
+bgMusic.volume = 0.7;
 
 /**********************************************************************************************************/
 let loop;
@@ -464,6 +467,7 @@ const submit = document.getElementById('submitName');
 submit.addEventListener('click', e => {
   e.preventDefault();
 
+  bgMusic.volume = 0.3;
   gameState.name = name.value;
   startGame();
   document.body.appendChild(canvas);

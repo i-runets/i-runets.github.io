@@ -207,3 +207,8 @@ input[type='text'] {
     border-radius: 10px;
     color: rgb(37, 10, 192);
 }
+
+canvas {
+    border-radius: 40px;
+    border: 9px solid rgb(175, 22, 35);
+}
