@@ -1,5 +1,10 @@
 @import './normalize.css';
 
+@font-face {
+    font-family: 'Ryuk';
+    src: url("../fonts/Ryuk.ttf");
+}
+
 body {
     display: flex;
     justify-content: center;

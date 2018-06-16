@@ -27,7 +27,7 @@ const context = canvas.getContext('2d');
 canvas.width = 1100;
 canvas.height = 700;
 context.fillStyle = '#382B5F';
-context.font = '25px Comic Sans MS';
+context.font = '30px Ryuk';
 context.textAlign = 'center';
 
 const result = {};
@@ -37,7 +37,7 @@ const gameState = {
   monsterState: 'idle',
   heroState: 'idle',
 };
-const spells = {
+const spellsIcon = {
   heal: './img/game/heal.png',
   bullet: './img/game/hit.png',
 };
@@ -87,7 +87,8 @@ const drawImages = () => {
   /* background */
   context.drawImage(background, 0, 0, canvas.width, canvas.height);
   context.fillStyle = '#382B5F';
-  context.fillText(`Монстров: ${gameState.rounds}`, canvas.width - 120, 50);
+  context.fillText(`Монстров   убито: ${gameState.rounds}`, canvas.width - 160,
+      50);
 
   /*spellbook*/
   context.drawImage(spellbook, 50, canvas.height - 100, 100, 100);
@@ -116,7 +117,6 @@ const createQ = () => {
   const modal = document.createElement('div');
   modal.classList.add('task');
   const description = document.createElement('p');
-  const translateOptions = document.createElement('p');
   let answer = document.createElement('input');
   answer.type = 'text';
   const submit = document.createElement('button');
@@ -125,11 +125,7 @@ const createQ = () => {
 
   let task = generateTask();
   let currentTask;
-  let numberForTranslate;
-  let numberForAudio;
-  let numberForDrag;
-  let numberForCapitals;
-  let numberForRecognizer;
+  let number;
   let wordForRecognizer;
   let resultForRecognizer;
   const playBtn = document.createElement('button');
@@ -143,21 +139,19 @@ const createQ = () => {
   }
   if (taskType === 1) {
     currentTask = task.translateArray;
-    numberForTranslate = Math.floor(Math.random() * currentTask.length);
-    const translatable = currentTask[numberForTranslate].translatable;
-    const variants = shuffle(currentTask[numberForTranslate].variants);
+    number = Math.floor(Math.random() * currentTask.length);
+    const translatable = currentTask[number].translatable;
     description.textContent = `Перевести: ${translatable}`;
-    translateOptions.textContent = `Варианты: ${variants}`;
   }
   if (taskType === 2) {
     const synth = window.speechSynthesis;
     modal.appendChild(playBtn);
     currentTask = task.audio;
-    numberForAudio = Math.floor(Math.random() * currentTask.length);
+    number = Math.floor(Math.random() * currentTask.length);
     description.textContent = 'Введите услышаное слово';
     const speech = new SpeechSynthesisUtterance();
     speech.lang = 'en-GB';
-    speech.text = currentTask[numberForAudio];
+    speech.text = currentTask[number];
     playBtn.addEventListener('click', e => {
       e.preventDefault();
       synth.speak(speech);
@@ -165,14 +159,14 @@ const createQ = () => {
   }
   if (taskType === 3) {
     currentTask = task.drag;
-    numberForDrag = Math.floor(Math.random() * currentTask.length);
+    number = Math.floor(Math.random() * currentTask.length);
     description.textContent = 'Расставьте в правильном порядке';
     const drag = document.createElement('div');
     const ul = document.createElement('ul');
 
-    const word = shuffle(currentTask[numberForDrag].split('')).join('');
+    const word = shuffle(currentTask[number].split('')).join('');
 
-    for (let i = 0; i < currentTask[numberForDrag].length; i++) {
+    for (let i = 0; i < currentTask[number].length; i++) {
       const li = document.createElement('li');
       li.textContent = word[i];
       ul.appendChild(li);
@@ -187,10 +181,10 @@ const createQ = () => {
   }
   if (taskType === 4) {
     currentTask = task.capitals;
-    numberForCapitals = Math.floor(Math.random() * currentTask.length);
+    number = Math.floor(Math.random() * currentTask.length);
     description.textContent = 'Столица: ';
     const img = new Image();
-    img.src = currentTask[numberForCapitals].img;
+    img.src = currentTask[number].img;
     modal.appendChild(img);
   }
   if (taskType === 5) {
@@ -212,8 +206,8 @@ const createQ = () => {
   if (taskType === 6) {
     currentTask = task.recognizer;
     wordForRecognizer = task.audio;
-    numberForRecognizer = Math.floor(Math.random() * wordForRecognizer.length);
-    description.textContent = `Произнести: ${wordForRecognizer[numberForRecognizer]}`;
+    number = Math.floor(Math.random() * wordForRecognizer.length);
+    description.textContent = `Произнести: ${wordForRecognizer[number]}`;
     answer = document.createElement('p');
     currentTask.onresult = e => {
       resultForRecognizer = e.results[e.resultIndex];
@@ -230,9 +224,13 @@ const createQ = () => {
     });
     modal.appendChild(play);
   }
+  if (taskType === 7) {
+    currentTask = task.riddles;
+    number = Math.floor(Math.random() * currentTask.length);
+    description.textContent = `Ответьте на загадку: \n ${currentTask[number].riddle}`;
+  }
 
   modal.appendChild(description);
-  modal.appendChild(translateOptions);
   modal.appendChild(answer);
   modal.appendChild(submit);
   qWrapper.appendChild(modal);
@@ -247,7 +245,7 @@ const createQ = () => {
       }
     }
     if (taskType === 1) {
-      if (currentTask[numberForTranslate].translate.indexOf(
+      if (currentTask[number].translate.indexOf(
           answer.value.toLowerCase()) > -1) {
         castSpell(gameState.selectedSpell, 'monster');
       } else {
@@ -255,7 +253,7 @@ const createQ = () => {
       }
     }
     if (taskType === 2) {
-      if (answer.value.toLowerCase() === currentTask[numberForAudio]) {
+      if (answer.value.toLowerCase() === currentTask[number]) {
         castSpell(gameState.selectedSpell, 'monster');
       } else {
         castSpell('lighting', 'hero');
@@ -267,7 +265,7 @@ const createQ = () => {
       for (let i = 0; i < drag.childElementCount; i++) {
         res += drag.children[i].textContent;
       }
-      if (res === currentTask[numberForDrag]) {
+      if (res === currentTask[number]) {
         castSpell(gameState.selectedSpell, 'monster');
       } else {
         castSpell('lighting', 'hero');
@@ -275,7 +273,7 @@ const createQ = () => {
     }
     if (taskType === 4) {
       if (answer.value.toLowerCase() ===
-          currentTask[numberForCapitals].capital) {
+          currentTask[number].capital) {
         castSpell(gameState.selectedSpell, 'monster');
       } else {
         castSpell('lighting', 'hero');
@@ -297,8 +295,14 @@ const createQ = () => {
       }
     }
     if (taskType === 6) {
-      console.log(answer.textContent, wordForRecognizer[numberForRecognizer]);
-      if (answer.textContent === wordForRecognizer[numberForRecognizer]) {
+      if (answer.textContent === wordForRecognizer[number]) {
+        castSpell(gameState.selectedSpell, 'monster');
+      } else {
+        castSpell('lighting', 'hero');
+      }
+    }
+    if (taskType === 7) {
+      if (answer.value.toLowerCase() === currentTask[number].answer) {
         castSpell(gameState.selectedSpell, 'monster');
       } else {
         castSpell('lighting', 'hero');
@@ -322,8 +326,8 @@ const chooseSpell = () => {
   spellWindow.appendChild(spellList);
   spellWindowWrapper.appendChild(spellWindow);
 
-  for (const spell in spells) {
-    if (spells.hasOwnProperty(spell)) {
+  for (const spell in spellsIcon) {
+    if (spellsIcon.hasOwnProperty(spell)) {
       const label = document.createElement('label');
       const img = new Image();
       img.src = './img/game/icon_spell_' + spell + '.png';
@@ -470,7 +474,7 @@ const submit = document.getElementById('submitName');
 submit.addEventListener('click', e => {
   e.preventDefault();
 
-  bgMusic.volume = 0.3;
+  bgMusic.volume = 0.2;
   gameState.name = name.value;
   startGame();
   document.body.appendChild(canvas);
@@ -482,7 +486,7 @@ canvas.addEventListener('click', e => {
   const rect = canvas.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
-  if (y >= 612 && y <= 685 && x >= 65 && x <= 130) {
+  if (y >= 612 && y <= 685 && x >= 65 && x <= 145) {
     chooseSpell();
   }
 });

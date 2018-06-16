@@ -1,5 +1,6 @@
 const dictionary = require('./dictionary');
 const capitals = require('./capitals');
+const riddles = require('./riddles');
 
 export const generateTask = () => {
   let math;
@@ -22,6 +23,7 @@ export const generateTask = () => {
   task.math = math;
   task.capitals = capitals;
   task.sort = sort;
+  task.riddles = riddles;
 
   return task;
 };
