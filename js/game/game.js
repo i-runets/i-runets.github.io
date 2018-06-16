@@ -310,6 +310,8 @@ const createQ = () => {
 };
 
 const chooseSpell = () => {
+  const spellWindowWrapper = document.createElement('div');
+  spellWindowWrapper.classList.add('spellWrapper');
   const spellWindow = document.createElement('div');
   spellWindow.classList.add('spell');
   const submit = document.createElement('input');
@@ -318,6 +320,7 @@ const chooseSpell = () => {
   const spellList = document.createElement('div');
   spellList.classList.add('spellList');
   spellWindow.appendChild(spellList);
+  spellWindowWrapper.appendChild(spellWindow);
 
   for (const spell in spells) {
     if (spells.hasOwnProperty(spell)) {
@@ -336,7 +339,7 @@ const chooseSpell = () => {
   }
 
   spellWindow.appendChild(submit);
-  document.body.appendChild(spellWindow);
+  document.body.appendChild(spellWindowWrapper);
 
   submit.addEventListener('click', e => {
     e.preventDefault();
@@ -346,7 +349,7 @@ const chooseSpell = () => {
         gameState.selectedSpell = spells[i].id;
       }
     }
-    spellWindow.remove();
+    spellWindowWrapper.remove();
     createQ();
   });
 };

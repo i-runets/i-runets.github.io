@@ -11,7 +11,8 @@ body {
 
 .task {
     background: rgb(255, 255, 255);
-    padding: 20px;
+    padding: 30px;
+    border-radius: 20px;
 }
 
 input {
@@ -58,12 +59,13 @@ input[type='text'] {
 .qWrapper {
     position: absolute;
     display: flex;
-    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
     overflow-y: auto;
-    background: rgb(255, 255, 255);
-    width: 350px;
-    padding: 30px;
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.37);
+    width: 1100px;
+    height: 700px;
+    border-radius: 30px;
 }
 
 .scoreboard {
@@ -98,6 +100,18 @@ input[type='text'] {
     border-radius: 10px;
     padding: 5px;
     margin: 5px;
+}
+
+.spellWrapper {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.37);
+    width: 1100px;
+    height: 700px;
+    border-radius: 30px;
 }
 
 .spell {
