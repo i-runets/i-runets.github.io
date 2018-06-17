@@ -72,17 +72,6 @@ const startGame = () => {
   gameLoop();
 };
 
-const generateNewMonster = (monster) => {
-  monster.hp = Monster.generateHealth(gameState.rounds);
-  monster.name = Monster.generateName();
-  monster.leftLegs = Monster.generateBody().leftLegs;
-  monster.rightLegs = Monster.generateBody().rightLegs;
-  monster.leftHands = Monster.generateBody().leftHands;
-  monster.rightHands = Monster.generateBody().rightHands;
-  monster.body = Monster.generateBody().body;
-  monster.head = Monster.generateBody().head;
-};
-
 const drawImages = () => {
   /* background */
   context.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -399,7 +388,7 @@ const createScoreboard = () => {
 
   const topScore = document.createElement('div');
   topScore.classList.add('topScore');
-  const scores = JSON.parse(localStorage.finalGame);
+  const scores = JSON.parse(localStorage.Journey);
   scores.sort((a, b) => {
     return b.rounds - a.rounds;
   });
@@ -432,9 +421,9 @@ const checkState = () => {
   if (hero.hp <= 0) {
     result.name = gameState.nickname;
     result.rounds = gameState.rounds;
-    let oldResults = JSON.parse(localStorage.getItem('finalGame')) || [];
+    let oldResults = JSON.parse(localStorage.getItem('Journey')) || [];
     oldResults.push(result);
-    localStorage.setItem('finalGame', JSON.stringify(oldResults));
+    localStorage.setItem('Journey', JSON.stringify(oldResults));
     createScoreboard();
   }
   if (monster.hp <= 0) {
@@ -457,7 +446,7 @@ const gunSound = new Audio('./sound/gun.mp3');
 const bgMusic = new Audio('./sound/background.mp3');
 bgMusic.play();
 bgMusic.loop = true;
-bgMusic.volume = 0.7;
+bgMusic.volume = 0.5;
 
 /**********************************************************************************************************/
 let loop;
@@ -474,7 +463,7 @@ const submit = document.getElementById('submitName');
 submit.addEventListener('click', e => {
   e.preventDefault();
 
-  bgMusic.volume = 0.2;
+  bgMusic.volume = 0.1;
   gameState.name = name.value;
   startGame();
   document.body.appendChild(canvas);

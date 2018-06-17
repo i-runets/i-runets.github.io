@@ -26,5 +26,9 @@
   {
     "capital": "кампала",
     "img": "./img/game/capitals/uganda.png"
+  },
+  {
+    "capital": "cтокгольм",
+    "img": "./img/game/capitals/sweden.png"
   }
 ]

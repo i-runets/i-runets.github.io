@@ -94,7 +94,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-    background: url("../img/game/background.png"), linear-gradient(to right, rgba(30, 75, 115, 1), rgba(255, 255, 255, 0)) center !important;
+    background: url("../img/game/background.png") center !important;
     background-size: cover !important;
 }
 
@@ -106,7 +106,6 @@ body {
 
 .about-game p {
     color: #000;
-    border-radius: 10px;
     font-size: 25px;
     text-align: center;
 }
@@ -139,7 +138,7 @@ body {
 
 .screenshots h2 {
     text-align: center;
-    font-size: 50px;
+    font-size: 80px;
     margin: 0;
 }
 
