@@ -41,9 +41,10 @@ const spellsIcon = {
   heal: './img/game/heal.png',
   bullet: './img/game/hit.png',
 };
-const lighting = new Spell().spells.lighting;
-const bullet = new Spell().spells.bullet;
-const heal = new Spell().spells.heal;
+const spells = new Spell();
+const lighting = spells.spells.lighting;
+const bullet = spells.spells.bullet;
+const heal = spells.spells.heal;
 let hero;
 let monster;
 const spellbook = new Image();
