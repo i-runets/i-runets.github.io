@@ -40,7 +40,6 @@ export default class Monster {
       'огр',
       'гном',
       'гоблин',
-      'человек',
     ];
     const lastName = [
       'том',

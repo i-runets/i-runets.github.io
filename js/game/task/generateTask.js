@@ -19,11 +19,14 @@ export const generateTask = () => {
   recognizer.interimResults = true;
   recognizer.lang = 'en-US';
 
+  const toBin = Math.floor(Math.random() * 10) + 5;
+
   task.recognizer = recognizer;
   task.math = math;
   task.capitals = capitals;
   task.sort = sort;
   task.riddles = riddles;
+  task.toBin = toBin;
 
   return task;
 };

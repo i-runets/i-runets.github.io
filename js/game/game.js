@@ -219,6 +219,11 @@ const createQ = () => {
     description.textContent = `Ответьте на загадку: \n ${currentTask[number].riddle}`;
   }
 
+  if (taskType === 8) {
+    currentTask = task.toBin;
+    description.textContent = `Перевелите число ${currentTask} в двоичную систему счисления`;
+  }
+
   modal.appendChild(description);
   modal.appendChild(answer);
   modal.appendChild(submit);
@@ -292,6 +297,13 @@ const createQ = () => {
     }
     if (taskType === 7) {
       if (answer.value.toLowerCase() === currentTask[number].answer) {
+        castSpell(gameState.selectedSpell, 'monster');
+      } else {
+        castSpell('lighting', 'hero');
+      }
+    }
+    if (taskType === 8) {
+      if (parseInt(answer.value, 2) === currentTask) {
         castSpell(gameState.selectedSpell, 'monster');
       } else {
         castSpell('lighting', 'hero');
