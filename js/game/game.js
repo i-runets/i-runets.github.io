@@ -456,9 +456,7 @@ const lightingSound = new Audio('./sound/lighting.mp3');
 const healSound = new Audio('./sound/heal.mp3');
 const gunSound = new Audio('./sound/gun.mp3');
 const bgMusic = new Audio('./sound/background.mp3');
-bgMusic.play();
 bgMusic.loop = true;
-bgMusic.volume = 0.5;
 
 /**********************************************************************************************************/
 let loop;
@@ -475,6 +473,7 @@ const submit = document.getElementById('submitName');
 submit.addEventListener('click', e => {
   e.preventDefault();
 
+  bgMusic.play();
   bgMusic.volume = 0.1;
   gameState.name = name.value;
   startGame();
