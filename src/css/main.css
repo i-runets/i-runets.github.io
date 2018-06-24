@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito|Yatra+One');
+@import url('./normalize.css');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #c1c1c1;
+    font-family: 'Nunito', sans-serif;
+}
+
+.header {
+    display: grid;
+    grid-template: 'logo navigation';
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: rgba(0, 0, 0, 0.84);
+    color: #ffffff;
+    padding: 0 100px;
+    z-index: 2;
+    height: 60px;
+}
+
+.logo {
+    grid-area: logo;
+    font-family: 'Yatra One', cursive;
+    font-size: 20px;
+}
+
+.navigation {
+    grid-area: navigation;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-item {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.nav-item.active {
+    background-color: transparent;
+}
+
+.nav-item a {
+    padding: 20px 10px;
+    margin: 0 5px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-item a:hover {
+    background: white;
+    color: black;
+    transition: 0.8s;
+}
+
+.nav-item.active a {
+    background: #ffffff;
+    color: #000;
+}
+
+.main {
+    display: grid;
+    grid-template: 'about-game' 'screenshots' 'developers';
+    justify-items: center;
+}
+
+.main section:nth-child(2n) {
+    background: #e5e5e5;
+}
+
+.main section:nth-child(2n+1) {
+    background: #ffffff;
+}
+
+.about-game {
+    grid-area: about-game;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    background: url("/src/img/background.png") center !important;
+    background-size: cover !important;
+}
+
+.about-game h1 {
+    font-family: 'Yatra One', cursive;
+    font-size: 80px;
+    text-align: center;
+}
+
+.about-game p {
+    color: #000;
+    font-size: 25px;
+    text-align: center;
+}
+
+.start-game {
+    background: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 20px 50px;
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.start-game:hover {
+    color: #000000;
+    background: #ffffff;
+    transition: 0.7s;
+    box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.35);
+}
+
+.screenshots {
+    grid-area: screenshots;
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.screenshots h2 {
+    text-align: center;
+    font-size: 80px;
+    margin: 0;
+}
+
+.screenshots-wrapper {
+
+    position: relative;
+    margin: auto;
+}
+
+.screenshots-item {
+    display: none;
+}
+
+.screenshots-item img {
+    width: 100%;
+    border-radius: 20px;
+    max-width: 1360px;
+    max-height: 690px;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.active {
+    background-color: #717171;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+.developers {
+    grid-area: developers;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.developers a {
+    color: #000;
+}
+
+.developers p:nth-child(2) {
+    font-size: 25px;
+}
+
+.footer {
+    color: #ffffff;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Yatra One', cursive;
+    font-size: 12px;
+}
+
+@media (max-width: 600px) {
+    .header {
+        grid-template: 'logo' 'navigation';
+        padding: 0 10px;
+    }
+
+    .navigation {
+        justify-content: center;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .nav-item a {
+        padding: 6px 3px;
+    }
+}
