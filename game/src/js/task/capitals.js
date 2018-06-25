@@ -4,11 +4,17 @@ import {arrayRandomNumber} from '../utils/utils';
 export class Capital {
   constructor(modal) {
     this.currentCapital = capitals[arrayRandomNumber(capitals)];
-    this.modal = modal;
+    this.isAnswered = '';
     this.render();
   }
 
   render() {
+    const qWrapper = document.createElement('div');
+    qWrapper.classList.add('qWrapper');
+    document.body.appendChild(qWrapper);
+    const modal = document.createElement('div');
+    modal.classList.add('task');
+    qWrapper.appendChild(modal);
     const img = new Image();
     img.src = this.currentCapital.img;
     const description = document.createElement('p');
@@ -26,10 +32,24 @@ export class Capital {
     submit.classList.add('submitBtn');
     submit.value = 'OK';
 
-    this.modal.appendChild(img);
-    this.modal.appendChild(description);
+    modal.appendChild(img);
+    modal.appendChild(description);
     form.appendChild(answer);
     form.appendChild(submit);
-    this.modal.appendChild(form);
+    modal.appendChild(form);
+
+    modal.addEventListener('click', e => {
+      e.preventDefault();
+      const target = e.target;
+      if (target === submit) {
+        if (answer.value.trim().toLowerCase() ===
+            this.currentCapital.capital) {
+          this.isAnswered = true;
+        } else {
+          this.isAnswered = false;
+        }
+        qWrapper.remove();
+      }
+    });
   }
 }

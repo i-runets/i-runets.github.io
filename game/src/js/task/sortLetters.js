@@ -4,13 +4,19 @@ import sortable from 'jquery-ui/sortable';
 import {arrayRandomNumber, shuffle} from '../utils/utils';
 
 export class SortLetters {
-  constructor(modal) {
-    this.modal = modal;
+  constructor() {
     this.currentWord = wordsForSort[arrayRandomNumber(wordsForSort)];
     this.render();
+    this.isAnswered = '';
   }
 
   render() {
+    const qWrapper = document.createElement('div');
+    qWrapper.classList.add('qWrapper');
+    document.body.appendChild(qWrapper);
+    const modal = document.createElement('div');
+    modal.classList.add('task');
+    qWrapper.appendChild(modal);
     const description = document.createElement('p');
     description.textContent = 'Составте слово: ';
 
@@ -34,8 +40,26 @@ export class SortLetters {
       $('.sort').sortable();
     });
 
-    this.modal.appendChild(description);
-    this.modal.appendChild(answer);
-    this.modal.appendChild(submit);
+    modal.appendChild(description);
+    modal.appendChild(answer);
+    modal.appendChild(submit);
+
+    modal.addEventListener('click', e => {
+      e.preventDefault();
+      const target = e.target;
+      if (target === submit) {
+        let res = [];
+        const sort = document.querySelector('.sort');
+        for (let i = 0; i < sort.childElementCount; i++) {
+          res.push(sort.children[i].textContent);
+        }
+        if (res.join('') === this.currentWord) {
+          this.isAnswered = true;
+        } else {
+          this.isAnswered = false;
+        }
+        qWrapper.remove();
+      }
+    });
   }
 }

@@ -77,18 +77,18 @@ export default class Game {
       this.spell.isSpellSelected = false;
       this.task.show();
     }
-    if (this.task.isAnswered === true) {
+    if (this.task.currentTask.isAnswered === true) {
       if (this.spell.selectedSpell === 'bullet') {
         this.player.attack(this.monster);
       }
       if (this.spell.selectedSpell === 'heal') {
         this.player.heal();
       }
-      this.task.isAnswered = '';
+      this.task.currentTask.isAnswered = '';
     }
-    if (this.task.isAnswered === false) {
+    if (this.task.currentTask.isAnswered === false) {
       this.monster.attack(this.player);
-      this.task.isAnswered = '';
+      this.task.currentTask.isAnswered = '';
     }
     if (this.player.hp <= 0) {
       this.cancelAnimation();

@@ -1,11 +1,17 @@
 export class ToBin {
-  constructor(modal) {
-    this.modal = modal;
+  constructor() {
     this.number = Math.floor(Math.random() * 10) + 5;
+    this.isAnswered = '';
     this.render();
   }
 
   render() {
+    const qWrapper = document.createElement('div');
+    qWrapper.classList.add('qWrapper');
+    document.body.appendChild(qWrapper);
+    const modal = document.createElement('div');
+    modal.classList.add('task');
+    qWrapper.appendChild(modal);
     const description = document.createElement('p');
     description.textContent = `Перевелите число ${this.number} в двоичную систему счисления`;
 
@@ -23,7 +29,21 @@ export class ToBin {
 
     form.appendChild(answer);
     form.appendChild(submit);
-    this.modal.appendChild(description);
-    this.modal.appendChild(form);
+    modal.appendChild(description);
+    modal.appendChild(form);
+
+    modal.addEventListener('click', e => {
+      e.preventDefault();
+      const target = e.target;
+      if (target === submit) {
+        if (parseInt(answer.value.trim().toLowerCase(), 2) ===
+            this.number) {
+          this.isAnswered = true;
+        } else {
+          this.isAnswered = false;
+        }
+        qWrapper.remove();
+      }
+    });
   }
 }
